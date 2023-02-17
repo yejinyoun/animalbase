@@ -48,6 +48,52 @@ function preapareObject(jsonObject) {
   return animal;
 }
 
+function filterClicked() {
+  const buttons = document.querySelectorAll("button");
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const filter = button.dataset.filter;
+      filterAnimal(filter);
+
+      console.log(`${filter} button clicked`);
+    });
+  });
+}
+
+// when filter button gets clicked
+// it executes a function that executes filterAnimal function
+// and give filterType (document.querySelector("button").dataset.filter = "dog" or "cat" or "*")
+
+// needed to use forEach bc doc.querySelector("button").addEventListener will activate only the first button
+// giving addEventListener to each button with forEach
+
+function filterAnimal(filterType) {
+  let filteredAnimals = allAnimals;
+
+  if (filterType === "cat") {
+    filteredAnimals = allAnimals.filter(filterCat);
+
+    function filterCat(animal) {
+      if (animal.type === "cat") {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  } else if (filterType === "dog") {
+    filteredAnimals = allAnimals.filter(filterDog);
+    function filterDog(animal) {
+      if (animal.type === "dog") {
+        return true;
+      } else {
+        false;
+      }
+    }
+  }
+
+  displayList(filteredAnimals);
+}
+
 function displayList(animals) {
   // clear the list
   document.querySelector("#list tbody").innerHTML = "";
@@ -68,31 +114,4 @@ function displayAnimal(animal) {
 
   // append clone to list
   document.querySelector("#list tbody").appendChild(clone);
-}
-
-// when filter button gets clicked
-// it executes a function that executes filterAnimal function
-// and give filterType (document.querySelector("button").dataset.filter = "dog" or "cat" or "*")
-
-// needed to use forEach bc doc.querySelector("button").addEventListener will activate only the first button
-// giving addEventListener to each button with forEach
-
-function filterClicked() {
-  const buttons = document.querySelectorAll("button");
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function () {
-      const filter = button.dataset.filter;
-      filterAnimal(filter);
-    });
-  });
-}
-
-function filterAnimal(filterType) {
-  console.log(filterType);
-
-  function filterCat() {}
-
-  function filterDog() {}
-
-  function filterAll() {}
 }
