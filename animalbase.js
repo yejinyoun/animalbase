@@ -32,7 +32,7 @@ async function loadJSON() {
 function prepareObjects(jsonData) {
   allAnimals = jsonData.map(preapareObject);
 
-  // TODO: This might not be the function we want to call first
+  // even though the buttons aren't clicked, it should show the animals when the data is ready so
   displayList(allAnimals);
 }
 
@@ -61,16 +61,19 @@ function filterClicked() {
 }
 
 // when filter button gets clicked
-// it executes a function that executes filterAnimal function
-// and give filterType (document.querySelector("button").dataset.filter = "dog" or "cat" or "*")
+// it executes an anonymous function that executes filterAnimal function
+// and give filter as parameter (document.querySelector("button").dataset.filter = "dog" or "cat" or "*")
 
 // needed to use forEach bc doc.querySelector("button").addEventListener will activate only the first button
-// giving addEventListener to each button with forEach
 
 function filterAnimal(filterType) {
-  let filteredAnimals = allAnimals;
+  let filteredAnimals = allAnimals; //showing allAnimals as base setting
 
   if (filterType === "cat") {
+    // if the clicked button was cat, check allAnimals(array), if each object's type property is cat,
+    // array method .filter will create new array that are cats
+    // and changes the filteredAnimals value
+
     filteredAnimals = allAnimals.filter(filterCat);
 
     function filterCat(animal) {
@@ -91,7 +94,7 @@ function filterAnimal(filterType) {
     }
   }
 
-  displayList(filteredAnimals);
+  displayList(filteredAnimals); // gets executed at the end, bc filteredAnimals variable will change, if it's cat or dog
 }
 
 function displayList(animals) {
