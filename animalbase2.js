@@ -67,34 +67,21 @@ function filterClicked() {
 // needed to use forEach bc doc.querySelector("button").addEventListener will activate only the first button
 
 function filterAnimal(filterType) {
-  let filteredAnimals = allAnimals; //showing allAnimals as base setting
+  if (filterType === "*") {
+    displayList(allAnimals);
+  } else {
+    const filterList = allAnimals.filter(animalFilter);
 
-  if (filterType === "cat") {
-    // if the clicked button was cat, check allAnimals(array), if each object's type property is cat,
-    // array method .filter will create new array that are cats
-    // and changes the filteredAnimals value
-
-    filteredAnimals = allAnimals.filter(filterCat);
-
-    function filterCat(animal) {
-      if (animal.type === "cat") {
+    function animalFilter(animal) {
+      if (animal.type === filterType) {
         return true;
       } else {
         return false;
       }
     }
-  } else if (filterType === "dog") {
-    filteredAnimals = allAnimals.filter(filterDog);
-    function filterDog(animal) {
-      if (animal.type === "dog") {
-        return true;
-      } else {
-        false;
-      }
-    }
-  }
 
-  displayList(filteredAnimals); // gets executed at the end, bc filteredAnimals variable will change, if it's cat or dog
+    displayList(filterList);
+  }
 }
 
 function displayList(animals) {
