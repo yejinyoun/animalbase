@@ -68,7 +68,7 @@ function filterClicked() {
 
 function filterAnimal(filterType) {
   if (filterType === "*") {
-    displayList(allAnimals);
+    sortAnimal(allAnimals);
   } else {
     const filterList = allAnimals.filter(animalFilter);
 
@@ -80,7 +80,28 @@ function filterAnimal(filterType) {
       }
     }
 
-    displayList(filterList);
+    sortAnimal(filterList);
+  }
+}
+
+function sortAnimal(list) {
+  const sortedList = list.sort(sortByAge);
+  displayList(sortedList);
+}
+
+function sortByName(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  } else {
+    return 1;
+  }
+}
+
+function sortByAge(a, b) {
+  if (a.age < b.age) {
+    return -1;
+  } else {
+    return 1;
   }
 }
 
