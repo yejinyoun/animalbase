@@ -19,6 +19,7 @@ function start() {
 
   loadJSON();
   filterClicked();
+  sortClicked();
 }
 
 async function loadJSON() {
@@ -96,6 +97,20 @@ function filterAnimal(filterType) {
 
   displayList(filteredAnimals); // gets executed at the end, bc filteredAnimals variable will change, if it's cat or dog
 }
+
+function sortClicked() {
+  const buttons = document.querySelectorAll("th");
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const sort = button.dataset.sort;
+      sortList(sort);
+
+      console.log(`${sort} button clicked`);
+    });
+  });
+}
+
+function sortList(sortType) {}
 
 function displayList(animals) {
   // clear the list
